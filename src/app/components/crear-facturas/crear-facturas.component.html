@@ -4,7 +4,12 @@
             <div class="card-body">
                 <h5 class="titulo">FACTURA</h5>
 
-                <form [formGroup]="facturaForm" (ngSubmit)="submit()">
+                <!-- Barra de información -->
+                <div class="alert alert-info" role="alert">
+                El Campo Cliente solo acepta letras y El campo cantidad tiene que ser mayor a 0 
+                </div>
+
+                <form [formGroup]="facturaForm">
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
                             <i class="fas fa-user"></i>
@@ -13,8 +18,7 @@
                     </div>
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text">
-                            <i class="fas fa-calendar-alt"
-                                ></i>
+                            <i class="fas fa-calendar-alt"></i>
                         </span>
                         <input type="date" formControlName="fecha">
                     </div>
@@ -51,11 +55,10 @@
                         </div>
                     </div>
                     <div class="d-grid gap-2">
-                        <button [disabled]="this.facturaForm.invalid" type="submit" class="btn btn-success btn-lg">
+                        <button [disabled]="this.facturaForm.invalid" (click)="submit()" type="submit" class="btn btn-success btn-lg">
                             <i class="fas fa-database"></i>&nbsp; Crear Factura</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
