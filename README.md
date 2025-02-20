@@ -1,6 +1,11 @@
 # CrudAngularNet
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+
+# Instalaciones
+instalar Node version 16.20.0
+ejecutar :
+npm install bootstrap
+npm install sweetalert2
 
 ## Development server
 
