@@ -1,0 +1,109 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="titulo">FACTURAS</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-lg-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="titulo">LISTADO DE FACTURAS</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Valor Total</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let factura of facturas">
+                <td>{{ factura.cliente }}</td>
+                <td>{{ factura.fecha }}</td>
+                <td>{{ factura.total }}</td>
+                <td>
+                  <i (click)="abrirModalEditar(factura.id)" class="far fa-edit text-info"></i>
+                </td>
+                <td>
+                  <i (click)="eliminarfactura(factura.id)" class="far fa-trash-alt text-danger"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="titulo">FACTURA</h5>
+      
+      <!-- Botón de cierre "x" -->
+      <button type="button" class="btn-close" aria-label="Close" (click)="isModalOpen = false" style="position: absolute; top: 10px; right: 10px;">
+      </button>
+      
+      <form [formGroup]="editForm">
+        <div class="input-group input-group-lg mb-3">
+          <span class="input-group-text">
+            <i class="fas fa-user"></i>
+          </span>
+          <input formControlName="cliente" type="text" class="form-control" placeholder="Cliente">
+        </div>
+        <div class="input-group input-group-lg mb-3">
+          <span class="input-group-text">
+            <i class="fas fa-calendar-alt"></i>
+          </span>
+          <input type="date" formControlName="fecha">
+        </div>
+        <div class="input-group input-group-lg mb-3">
+          <span class="input-group-text">
+            <i class="fas fa-dollar-sign"></i>
+          </span>
+          <input formControlName="total" type="text" class="form-control" placeholder="Total" readonly>
+        </div>
+        <div formGroupName="detalleFactura">
+          <div class="input-group input-group-lg mb-3">
+            <span class="input-group-text">
+              <i class="fas fa-cube"></i>
+            </span>
+            <input formControlName="producto" type="text" class="form-control" placeholder="Producto" readonly>
+          </div>
+          <div class="input-group input-group-lg mb-3">
+            <span class="input-group-text">
+              <i class="fas fa-sort-amount-up"></i>
+            </span>
+            <input formControlName="cantidad" type="number" class="form-control" placeholder="Cantidad">
+          </div>
+          <div class="input-group input-group-lg mb-3">
+            <span class="input-group-text">
+              <i class="fas fa-dollar-sign"></i>
+            </span>
+            <input formControlName="precioUnitario" type="number" class="form-control" placeholder="Precio Unitario" readonly>
+          </div>
+          <div class="input-group input-group-lg mb-3">
+            <span class="input-group-text">
+              <i class="fas fa-dollar-sign"></i>
+            </span>
+            <input formControlName="subtotal" type="number" class="form-control" placeholder="Subtotal" readonly>
+          </div>
+        </div>
+        <div class="d-grid gap-2">
+          <button (click)="actualizarFactura()" type="submit" class="btn btn-success btn-lg">
+            <i  class="fas fa-database"></i>&nbsp; Actualizar Factura
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

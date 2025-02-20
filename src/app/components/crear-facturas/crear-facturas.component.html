@@ -1,0 +1,75 @@
+<div class="row mt-4">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="titulo">FACTURA</h5>
+
+                <form [formGroup]="facturaForm" (ngSubmit)="submit()">
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <input formControlName="cliente" type="text" class="form-control" placeholder="Cliente">
+                    </div>
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fas fa-calendar-alt"
+                                ></i>
+                        </span>
+                        <input type="date" formControlName="fecha">
+                    </div>
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fas fa-dollar-sign"></i>
+                        </span>
+                        <input formControlName="total" type="text" class="form-control" placeholder="Total" readonly>
+                    </div>
+                    <div formGroupName="detalleFactura">
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">
+                                <i class="fas fa-cube"></i>
+                            </span>
+                            <input formControlName="producto" type="text" class="form-control" placeholder="Producto" readonly>
+                        </div>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">
+                                <i class="fas fa-sort-amount-up"></i>
+                            </span>
+                            <input formControlName="cantidad" type="number" class="form-control" placeholder="Cantidad">
+                        </div>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">
+                                <i class="fas fa-dollar-sign"></i>
+                            </span>
+                            <input formControlName="precioUnitario" type="number" class="form-control" placeholder="Precio Unitario" readonly>
+                        </div>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">
+                                <i class="fas fa-dollar-sign"></i>
+                            </span>
+                            <input formControlName="subtotal" type="number" class="form-control" placeholder="Subtotal" readonly>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button [disabled]="this.facturaForm.invalid" type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-database"></i>&nbsp; Crear Factura</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="titulo">Productos Disponibles</h5>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let producto of productos" (click)="selectProducto(producto)">
+                        {{ producto.id }} - {{ producto.nombre }} - {{ producto.precioUnitario | currency }}
+                        <button class="btn btn-primary float-right" (click)="selectProducto(producto)">Seleccionar</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
